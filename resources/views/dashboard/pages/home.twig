@@ -1,0 +1,46 @@
+{% extends "dashboard/layout.twig" %}
+
+{% block content %}
+
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Zone</th>
+                <th>URL</th>
+                <th>Is active</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        
+        <tbody>
+            {% for post in postList %}
+                <tr data-post-id="{{ post.id }}">
+                    <td width="10%">
+                        {% if post.image.name %}
+                            <img class="img-responsive img-thumbnail" src="{{ base_url() }}/uploads/{{ post.image.name }}" alt="">
+                        {% endif %}
+                    </td>
+                    <td>{{ post.title }}</td>
+                    <td>{{ post.description }}</td>
+                    <td>{{ post.zone }}</td>
+                    <td>{{ post.slug }}</td>
+                    <td>
+                        {% if post.is_active == 1 %}
+                            <button class="btn btn-success change-status">Desactivate <i class="fa fa-toggle-off"></i></button>
+                        {% else %}
+                            <button class="btn btn-warning change-status">Activate <i class="fa fa-toggle-on"></i></button>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{{ path_for('post', {'id': post.id}) }}" class="btn btn-default">Edit</a>
+                        <button class="btn btn-danger btn-remove">Delete</button>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

@@ -1,0 +1,77 @@
+<form action="{{ path_for('post') }}" method="POST" enctype="multipart/form-data">
+
+    <input type="hidden" name="id" value="{{ post.id }}">
+
+    <div class="form-group {% if flash.errors.image %} has-error {% endif %}">
+        {% if post.image.name %}
+            <img src="{{ base_url() }}/uploads/{{ post.image.name }}" alt="" class="img-responsive img-thumbnail">
+        {% else %}
+            <label for="image">Image</label>
+        {% endif %}
+
+        <input type="file" name="image" id="image">
+        {% for error in flash.errors.image %}
+            <span class="help-block">{{ error }}</span>
+        {% endfor %}
+    </div>
+
+
+    <div class="form-group {% if flash.errors.title %} has-error {% endif %}">
+        <label for="title">Title</label>
+        <input type="text" name="title" id="title" class="form-control" value="{{ old.title ? old.title : post.title }}" required>
+        {% for error in flash.errors.title %}
+            <span class="help-block">{{ error }}</span>
+        {% endfor %}
+    </div>
+
+    <div class="form-group {% if flash.errors.description %} has-error {% endif %}">
+        <label for="description">Description</label>
+        <input type="text" name="description" id="description" class="form-control" value="{{ old.description ? old.description : post.description }}" required>
+        {% for error in flash.errors.description %}
+            <span class="help-block">{{ error }}</span>
+        {% endfor %}
+    </div>
+
+    <div class="form-group {% if flash.errors.zone %} has-error {% endif %}">
+        <label for="zone">Zone</label>
+        <select class="form-control" name="zone" id="zone" value="{{ old.zone ? old.zone : post.zone }}" required>
+            {% for value, name in zoneList %}
+            <option value="{{ value }}">{{  name|capitalize }}</option>
+            {% endfor %}
+        </select>
+        {% for error in flash.errors.zone %}
+            <span class="help-block">{{ error }}</span>
+        {% endfor %}
+    </div>
+
+    <div class="form-group {% if flash.errors.content %} has-error {% endif %}">
+        <label for="content">Content</label>
+        <textarea type="text" name="content" id="content" required>{{ old.content ? old.content : post.content }}</textarea>
+        {% for error in flash.errors.content %}
+            <span class="help-block">{{ error }}</span>
+        {% endfor %}
+    </div>
+
+    <div class="form-group {% if flash.errors.slug %} has-error {% endif %}">
+        <label for="slug">URL</label>
+        <input type="text" name="slug" id="slug" class="form-control" value="{{ old.slug ? old.slug : post.slug }}">
+        {% for error in flash.errors.slug %}
+            <span class="help-block">{{ error }}</span>
+        {% endfor %}
+    </div>
+
+    <div class="form-group {% if flash.errors.is_active %} has-error {% endif %}">
+        <div class="checkbox">
+            <label><input name="is_active" type="checkbox" value="1" {% if old.is_active == 1 or post.is_active == 1  %}checked="true"{% endif %}>Is active</label>
+        </div>
+        {% for error in flash.errors.is_active %}
+            <span class="help-block">{{ error }}</span>
+        {% endfor %}
+    </div>
+
+
+    <div class="form-group">
+        <input type="submit" value="Submit" class="btn btn-primary">
+    </div>
+</form>
+

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <link rel="stylesheet" href="{{ base_url() }}/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="{{ base_url() }}/css/dashboard/dashboard.css" />
+    <link rel="stylesheet" href="{{ base_url() }}/css/font-awesome.min.css" />
+
+    <script>var baseUrl = '{{ baseUrl }}'</script>
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-inverse navbar-static-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{{ path_for('home') }}">Slim 3</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="{{ path_for('home') }}">Dashboard</a></li>
+                <li><a href="{{ path_for('post') }}">Write an article</a></li>
+
+                {% if(user.name) %}
+                    <li><a href="{{ path_for('home') }}">{{ user.name|capitalize }}</a></li>
+                    <li><a href="{{ path_for('signout') }}">Sign Out</a></li>
+                {% else %}
+                    <li><a href="{{ path_for('signin') }}">Sign In</a></li>
+                {% endif %}
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>
+
+<div class="container">
+
+    {% if flash.success %}
+        <div class="alert alert-success">
+            {{ flash.success }}
+        </div>
+    {% endif %}
+
+    {% if flash.error %}
+        <div class="alert alert-danger">
+            {{ flash.error }}
+        </div>
+    {% endif %}
+
+    {% block content %}
+
+    {% endblock %}
+
+</div><!-- /.container -->
+
+<script src="{{ base_url() }}/js/jquery.min.js"></script>
+<script src="{{ base_url() }}/js/bootstrap.min.js"></script>
+<script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=5gbdpfuwutro4d7au245ofsjwxyr0pljhqy3qyku8mvgygsn"></script>
+<script src="{{ base_url() }}/js/dashboard/dashboard.js"></script>
+
+</body>
+</html>
