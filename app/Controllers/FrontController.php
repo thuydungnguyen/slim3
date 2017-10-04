@@ -25,4 +25,13 @@ class FrontController extends BaseController
         return $this->render($response, 'front/sections/service_detail.twig', ['post' => $post]);
     }
 
+    public function offer(RequestInterface $request, ResponseInterface $response, $args)
+    {
+        return $this->render($response, 'front/sections/ask_for_offer.twig');
+    }
+
+    public function contact(RequestInterface $request, ResponseInterface $response, $args)
+    {
+        return $this->render($response, 'front/sections/contact.twig');
+    }
 }

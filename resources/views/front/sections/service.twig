@@ -8,7 +8,7 @@
 
                 {% for post in postList %}
                     <div class="card" style="width: 20rem;">
-                        <img class="card-img-top" src="{{ base_url() }}/img/test3.jpg" alt="Card image cap">
+                        <img class="card-img-top" src="{{ base_url() }}/uploads/{{ post.image.name }}" alt="Card image cap">
                         <div class="card-block">
                             <h4 class="card-title">{{ post.title }}</h4>
                             <p class="card-text">{{ post.description }}</p>

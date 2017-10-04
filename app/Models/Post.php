@@ -14,10 +14,8 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     public static $zones = [
-        'home' => "Home",
         'service'   => "Servicii",
-        'blog'  => "Noutati legislative",
-        'contact'   => "Contact"
+        'blog'  => "Noutati legislative"
     ];
 
     protected $table = "posts";

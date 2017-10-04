@@ -114,7 +114,7 @@ class PagesController extends BaseController
         $post = Post::find($request->getParam('id'));
 
         if($post->image !== null){
-            $img = new Image($post->image->id);
+            $img = Image::find($post->image->id);
             $this->deleteImg($img);
         }
 

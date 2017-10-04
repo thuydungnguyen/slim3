@@ -2,6 +2,8 @@
 // front
 $app->get('/', \App\Controllers\FrontController::class.':index')->setName('index');
 $app->get('/servicii', \App\Controllers\FrontController::class.':service')->setName('service');
+$app->get('/cere-oferta', \App\Controllers\FrontController::class.':offer')->setName('offer');
+$app->get('/contact', \App\Controllers\FrontController::class.':contact')->setName('contact');
 $app->get('/servicii-detaliu/{slug}', \App\Controllers\FrontController::class.':serviceDetail')->setName('service_detail');
 
 
