@@ -13,16 +13,30 @@ class FrontController extends BaseController
         return $this->render($response, 'front/sections/index.twig');
     }
 
-    public function service(RequestInterface $request, ResponseInterface $response)
+    public function service(RequestInterface $request, ResponseInterface $response, $args)
     {
-        $postList = Post::where('is_active', 1)->where('zone', 'service')->get();
-        return $this->render($response, 'front/sections/service.twig', ['postList' => $postList]);
+        if(isset($args['slug']) && $args['slug'] !== null){
+            $returnArray['post'] = Post::where('slug', $args["slug"])->first();
+            $returnView = 'front/sections/service_detail.twig';
+        }else{
+            $returnArray['postList'] = Post::where('is_active', 1)->where('zone', 'service')->get();
+            $returnView = 'front/sections/service.twig';
+        }
+
+        return $this->render($response, $returnView, $returnArray);
     }
 
-    public function serviceDetail(RequestInterface $request, ResponseInterface $response, $args)
+    public function legislative(RequestInterface $request, ResponseInterface $response, $args)
     {
-        $post = Post::where('slug', $args["slug"])->first();
-        return $this->render($response, 'front/sections/service_detail.twig', ['post' => $post]);
+        if(isset($args['slug']) && $args['slug'] !== null){
+            $returnArray['post'] = Post::where('slug', $args["slug"])->first();
+            $returnView = 'front/sections/legislative_detail.twig';
+        }else{
+            $returnArray['postList'] = Post::where('is_active', 1)->where('zone', 'blog')->get();
+            $returnView = 'front/sections/legislative.twig';
+        }
+
+        return $this->render($response, $returnView, $returnArray);
     }
 
     public function offer(RequestInterface $request, ResponseInterface $response, $args)
