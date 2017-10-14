@@ -11,7 +11,9 @@
                 <div class="col-lg-8 col-lg-offset-2">
 
 
-                    <form id="contact-form" method="post" action="contact.php" role="form">
+                    <form id="contact-form" method="post" action="{{ path_for('contact') }}" role="form">
+
+                        {{ csrf()|raw }}
 
                         <div class="messages"></div>
 
@@ -67,7 +69,7 @@
 
                                 <div class="col-md-12">
                                     <input type="submit" class="btn btn-sm btn-pill btn-primary" value="Send message">
-                                    <a href="index.php" class="btn btn-md btn-pill btn-default"><span class="icon icon-reply"> Back</span></a>
+                                    <a href="{{ path_for('index') }}" class="btn btn-md btn-pill btn-default"><span class="icon icon-reply"> Back</span></a>
                                 </div>
                             </div>
 

@@ -2,8 +2,8 @@
 // front
 $app->get('/', \App\Controllers\FrontController::class.':index')->setName('index');
 $app->get('/cere-oferta', \App\Controllers\FrontController::class.':offer')->setName('offer');
-$app->get('/contact', \App\Controllers\FrontController::class.':contact')->setName('contact');
-$app->post('/contact', \App\Controllers\FrontController::class.':saveContact');
+$app->get('/contact', \App\Controllers\FrontController::class.':contact')->setName('contact')->add(new \App\Middlewares\TwigCsrfMiddleware($container->view->getEnvironment(), $container->csrf))->add($container->csrf);
+$app->post('/contact', \App\Controllers\FrontController::class.':saveContact')->add($container->csrf);
 $app->get('/noutati-legislative', \App\Controllers\FrontController::class.':legislative')->setName('legislative');
 $app->get('/servicii[/{slug}]', \App\Controllers\FrontController::class.':service')->setName('service');
 

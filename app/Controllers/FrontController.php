@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Models\Post;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
+use Respect\Validation\Validator as v;
 
 class FrontController extends BaseController
 {
@@ -28,7 +29,7 @@ class FrontController extends BaseController
 
     public function legislative(RequestInterface $request, ResponseInterface $response)
     {
-        $returnArray['postList'] = Post::where('is_active', 1)->where('zone', 'blog')->get();
+        $returnArray['postList'] = Post::where('is_active', 1)->where('zone', 'blog')->orderByDesc('created_at');
         $returnView = 'front/sections/legislative.twig';
 
         return $this->render($response, $returnView, $returnArray);
@@ -46,6 +47,33 @@ class FrontController extends BaseController
 
     public function saveContact(RequestInterface $request, ResponseInterface $response)
     {
+        $status = 400;
+        $path = 'post';
+
+        $validation = $this->validate($request, [
+            'name'          => v::notEmpty(),
+            'surname'       => v::notEmpty(),
+            'email'         => v::email(),
+            'phone'         => v::notEmpty(),
+            'message'       => v::notEmpty()
+        ]);
+
+        if($validation->failed()) {
+            $this->setFlash($validation->getErrors(), 'errors');
+            return $this->redirect($response, $path, $status);
+        }
+
+        $postId = Post::updateOrCreate(
+            ['id'   => $request->getParam('id')],
+            [
+                'title' => $request->getParam('title'),
+                'description' => $request->getParam('description'),
+                'zone'  => $request->getParam('zone'),
+                'content'  => $request->getParam('content'),
+                'slug'      => $this->slugify($request),
+                'is_active' => $request->getParam('is_active')
+            ]
+        )->id;
 
 
     }
