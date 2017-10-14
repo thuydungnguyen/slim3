@@ -4,7 +4,7 @@ $app->get('/', \App\Controllers\FrontController::class.':index')->setName('index
 $app->get('/cere-oferta', \App\Controllers\FrontController::class.':offer')->setName('offer');
 $app->get('/contact', \App\Controllers\FrontController::class.':contact')->setName('contact');
 $app->post('/contact', \App\Controllers\FrontController::class.':saveContact');
-$app->get('/noutati-legislative[/{slug}]', \App\Controllers\FrontController::class.':legislative')->setName('legislative');
+$app->get('/noutati-legislative', \App\Controllers\FrontController::class.':legislative')->setName('legislative');
 $app->get('/servicii[/{slug}]', \App\Controllers\FrontController::class.':service')->setName('service');
 
 
