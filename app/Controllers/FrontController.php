@@ -26,15 +26,10 @@ class FrontController extends BaseController
         return $this->render($response, $returnView, $returnArray);
     }
 
-    public function legislative(RequestInterface $request, ResponseInterface $response, $args)
+    public function legislative(RequestInterface $request, ResponseInterface $response)
     {
-        if(isset($args['slug']) && $args['slug'] !== null){
-            $returnArray['post'] = Post::where('slug', $args["slug"])->first();
-            $returnView = 'front/sections/legislative_detail.twig';
-        }else{
-            $returnArray['postList'] = Post::where('is_active', 1)->where('zone', 'blog')->get();
-            $returnView = 'front/sections/legislative.twig';
-        }
+        $returnArray['postList'] = Post::where('is_active', 1)->where('zone', 'blog')->get();
+        $returnView = 'front/sections/legislative.twig';
 
         return $this->render($response, $returnView, $returnArray);
     }
