@@ -8903,8 +8903,8 @@ img.zoom-img {
     font-size: 1.25rem;
     margin-top: 30px; }
   .pull-quote > img {
-    width: 75px;
-    height: 75px; }
+    width: 350px;
+    height: 180px; }
   .pull-quote > cite {
     display: block;
     margin-top: 30px;
@@ -8919,10 +8919,17 @@ img.zoom-img {
       .pull-quote > cite {
         font-size: 14px; }
       .pull-quote > img {
-        width: 100px;
-        height: 100px; }
+        width: 850px;
+        height: 250px; }
       .pull-quote > p {
-        font-size: 1.5rem; } }
+        font-size: 1.2rem; } }
+
+@media (max-width: 576px) {
+    .ceccarCafr > img {
+        max-width: 25%;
+    }
+}
+
 
 .stage {
   background-color: #fff;
