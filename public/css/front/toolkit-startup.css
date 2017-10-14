@@ -8904,7 +8904,8 @@ img.zoom-img {
     margin-top: 30px; }
   .pull-quote > img {
     width: 350px;
-    height: 180px; }
+    height: 180px;
+      border-radius:15px; }
   .pull-quote > cite {
     display: block;
     margin-top: 30px;
@@ -8920,7 +8921,8 @@ img.zoom-img {
         font-size: 14px; }
       .pull-quote > img {
         width: 850px;
-        height: 250px; }
+        height: 250px;
+        border-radius:20px; }
       .pull-quote > p {
         font-size: 1.2rem; } }
 
@@ -8998,3 +9000,12 @@ h6, .h6 {
 
 strong {
   font-weight: bold; }
+
+div.wtf > hr.style18 {
+    height: 30px;
+    border-style: solid;
+    border-color: darkred;
+    border-width: 1px 0 0 0;
+    border-radius: 20px;
+}
+

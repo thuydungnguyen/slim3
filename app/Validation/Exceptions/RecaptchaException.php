@@ -9,7 +9,7 @@ class RecaptchaException extends ValidationException
 {
     public static $defaultTemplates = [
         self::MODE_DEFAULT => [
-            self::STANDARD => 'Validation message if MyRule fails validation.',
+            self::STANDARD => 'Va rugam sa bifati campul Captcha',
         ],
     ];
 

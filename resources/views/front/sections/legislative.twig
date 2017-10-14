@@ -2,34 +2,25 @@
 
 {% block content %}
 
-
     <div class="block block-fill-height text-center">
         <div class="block-xs-middle">
             <div class="container-fluid">
-                <blockquote class="pull-quote">
-                    <img src="https://static1.squarespace.com/static/51cdafc4e4b09eb676a64e68/57aa036e20099eb9c945bcae/57aa03705016e1b85aa5821b/1470759793960/nemo11.jpg" alt="">
-                    <h1>Testare legi legislative</h1>
-                    <p>
-                        Started at the bottom… etc
-                        Started at the bottom… etc
-                        Started at the bottom… etc
-                        Started at the bottom… etcStarted at the bottom… etcStarted at the bottom… etc
-                        Started at the bottom… etc
-                        Started at the bottom… etc
-                        Started at the bottom… etc
-                        Started at the bottom… etc
-                        Started at the bottom… etc
-                        Started at the bottom… etc
-                        Started at the bottom… etc
-                        Started at the bottom… etc
-                        Started at the bottom… etc
-                        Started at the bottom… etc
-                        Started at the bottom… etc
+
+                {% for post in postList %}
+
+                    <blockquote class="pull-quote">
+                        <img src="{{ base_url() }}/uploads/{{ post.image.name }}" alt="">
+                        <h2>{{ post.title }}</h2>
+                        {{ post.content|raw }}
+                        <div class="wtf">
+                            <hr class="style18">
+                        </div>
+
+                    </blockquote>
+
+                {% endfor %}
 
 
-                    </p>
-
-                </blockquote>
             </div>
         </div>
     </div>
