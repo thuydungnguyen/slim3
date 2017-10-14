@@ -6,6 +6,7 @@ use App\Models\Post;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Respect\Validation\Validator as v;
+v::with('App\\Validation\\Rules\\');
 
 class FrontController extends BaseController
 {
@@ -55,25 +56,19 @@ class FrontController extends BaseController
             'surname'       => v::notEmpty(),
             'email'         => v::email(),
             'phone'         => v::notEmpty(),
-            'message'       => v::notEmpty()
+            'message'       => v::notEmpty(),
+            'g-recaptcha-response' => v::recaptcha()
         ]);
+
+        echo 'not ok';
+        die();
+
+
 
         if($validation->failed()) {
             $this->setFlash($validation->getErrors(), 'errors');
             return $this->redirect($response, $path, $status);
         }
-
-        $postId = Post::updateOrCreate(
-            ['id'   => $request->getParam('id')],
-            [
-                'title' => $request->getParam('title'),
-                'description' => $request->getParam('description'),
-                'zone'  => $request->getParam('zone'),
-                'content'  => $request->getParam('content'),
-                'slug'      => $this->slugify($request),
-                'is_active' => $request->getParam('is_active')
-            ]
-        )->id;
 
 
     }
