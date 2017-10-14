@@ -48,4 +48,10 @@ class FrontController extends BaseController
     {
         return $this->render($response, 'front/sections/contact.twig');
     }
+
+    public function saveContact(RequestInterface $request, ResponseInterface $response)
+    {
+
+
+    }
 }
