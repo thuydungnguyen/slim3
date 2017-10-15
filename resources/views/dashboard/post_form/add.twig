@@ -1,0 +1,13 @@
+{% extends "dashboard/layout.twig" %}
+
+{% block content %}
+
+    <h1>New Article</h1>
+
+    {% include('dashboard/post_form/form.twig') %}
+
+{% endblock %}
+
+{% block customJS %}
+    {% include('dashboard/post_form/form_js.twig') %}
+{% endblock %}

@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\Dashboard;
 
 
+use App\Controllers\BaseController;
 use App\Models\User;
 use Slim\Http\Request;
 use Slim\Http\Response;

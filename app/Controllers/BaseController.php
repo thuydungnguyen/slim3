@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 
+use App\Models\Image;
 use App\Models\User;
 use Cocur\Slugify\Slugify;
 use Psr\Http\Message\ResponseInterface;
@@ -64,6 +65,13 @@ class BaseController
 
         $slug = new Slugify();
         return $slug->slugify($request->getParam('title'));
+    }
+
+    public function deleteImg(Image $img)
+    {
+        $imgName = $img->name;
+        $img->delete();
+        unlink($this->upload_directory . DIRECTORY_SEPARATOR . $imgName);
     }
 
     public static function moveUploadedFile($directory, UploadedFile $uploadedFile)

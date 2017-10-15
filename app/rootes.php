@@ -1,30 +1,36 @@
 <?php
 // front
-$app->get('/', \App\Controllers\FrontController::class.':index')->setName('index');
+$app->get('/', \App\Controllers\Front\FrontController::class.':index')->setName('index');
 
-$app->get('/cere-oferta', \App\Controllers\FrontController::class.':offer')->setName('offer');
+$app->get('/cere-oferta', \App\Controllers\Front\FrontController::class.':offer')->setName('offer');
 
-$app->get('/contact', \App\Controllers\FrontController::class.':contact')->setName('contact');
-$app->post('/contact', \App\Controllers\FrontController::class.':saveContact');
+$app->get('/contact', \App\Controllers\Front\FrontController::class.':contact')->setName('contact');
+$app->post('/contact', \App\Controllers\Front\FrontController::class.':saveContact');
 
-$app->get('/noutati-legislative', \App\Controllers\FrontController::class.':legislative')->setName('legislative');
+$app->get('/noutati-legislative', \App\Controllers\Front\FrontController::class.':legislative')->setName('legislative');
 
-$app->get('/servicii[/{slug}]', \App\Controllers\FrontController::class.':service')->setName('service');
+$app->get('/servicii[/{slug}]', \App\Controllers\Front\FrontController::class.':service')->setName('service');
 
 
 // admin
 $app->group('/admin', function() {
-    $this->get('', \App\Controllers\PagesController::class.':home')->setName('home');
-    $this->get('/post[/{id}]', \App\Controllers\PagesController::class.':getPost')->setName('post');
-    $this->post('/post', \App\Controllers\PagesController::class.':savePost');
-    $this->post('/changeStatus', \App\Controllers\PagesController::class.':changeStatus');
-    $this->post('/deletePost', \App\Controllers\PagesController::class.':deletePost');
-    $this->get('/signout', \App\Controllers\AuthController::class.':getSignOut')->setName('signout');
+    $this->get('/post[/{id}]', \App\Controllers\Dashboard\PostFormController::class.':getPost')->setName('post');
+    $this->post('/post', \App\Controllers\Dashboard\PostFormController::class.':savePost');
+
+    $this->get('', \App\Controllers\Dashboard\PostListController::class.':home')->setName('home');
+    $this->post('/changeStatus', \App\Controllers\Dashboard\PostListController::class.':changeStatus');
+    $this->post('/deletePost', \App\Controllers\Dashboard\PostListController::class.':deletePost');
+
+    $this->get('/signout', \App\Controllers\Dashboard\AuthController::class.':getSignOut')->setName('signout');
+
 })->add(new \App\Middlewares\AuthMiddleware($container));
 
 
 $app->group('/admin', function() use ($container) {
-    $this->get('/signin', \App\Controllers\AuthController::class.':getSignIn')->setName('signin')
+
+    $this->get('/signin', \App\Controllers\Dashboard\AuthController::class.':getSignIn')->setName('signin')
         ->add(new \App\Middlewares\TwigCsrfMiddleware($container->view->getEnvironment(), $container->csrf));
-    $this->post('/signin', \App\Controllers\AuthController::class.':postSignIn');
+
+    $this->post('/signin', \App\Controllers\Dashboard\AuthController::class.':postSignIn');
+
 })->add($container->csrf);
