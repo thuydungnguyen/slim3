@@ -3,6 +3,7 @@
 $app->get('/', \App\Controllers\Front\FrontController::class.':index')->setName('index');
 
 $app->get('/cere-oferta', \App\Controllers\Front\FrontController::class.':offer')->setName('offer');
+$app->post('/cere-oferta', \App\Controllers\Front\FrontController::class.':postOffer');
 
 $app->get('/contact', \App\Controllers\Front\FrontController::class.':contact')->setName('contact');
 $app->post('/contact', \App\Controllers\Front\FrontController::class.':postContact');
