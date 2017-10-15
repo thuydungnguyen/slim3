@@ -49,7 +49,7 @@ class FrontController extends BaseController
     public function saveContact(RequestInterface $request, ResponseInterface $response)
     {
         $status = 400;
-        $path = 'post';
+        $path = 'legislative';
 
         $validation = $this->validate($request, [
             'name'          => v::notEmpty(),
@@ -60,16 +60,10 @@ class FrontController extends BaseController
             'g-recaptcha-response' => v::recaptcha()
         ]);
 
-        echo 'not ok';
-        die();
-
-
-
         if($validation->failed()) {
             $this->setFlash($validation->getErrors(), 'errors');
             return $this->redirect($response, $path, $status);
         }
-
 
     }
 }
