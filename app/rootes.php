@@ -5,7 +5,7 @@ $app->get('/', \App\Controllers\Front\FrontController::class.':index')->setName(
 $app->get('/cere-oferta', \App\Controllers\Front\FrontController::class.':offer')->setName('offer');
 
 $app->get('/contact', \App\Controllers\Front\FrontController::class.':contact')->setName('contact');
-$app->post('/contact', \App\Controllers\Front\FrontController::class.':saveContact');
+$app->post('/contact', \App\Controllers\Front\FrontController::class.':postContact');
 
 $app->get('/noutati-legislative', \App\Controllers\Front\FrontController::class.':legislative')->setName('legislative');
 

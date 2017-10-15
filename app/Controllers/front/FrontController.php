@@ -47,11 +47,8 @@ class FrontController extends BaseController
         return $this->render($response, 'front/sections/contact.twig');
     }
 
-    public function saveContact(RequestInterface $request, ResponseInterface $response)
+    public function postContact(RequestInterface $request, ResponseInterface $response)
     {
-        $status = 400;
-        $path = 'legislative';
-
         $validation = $this->validate($request, [
             'name'          => v::notEmpty(),
             'surname'       => v::notEmpty(),
@@ -63,8 +60,21 @@ class FrontController extends BaseController
 
         if($validation->failed()) {
             $this->setFlash($validation->getErrors(), 'errors');
-            return $this->redirect($response, $path, $status);
+            return $this->redirect($response, 'contact', 400);
         }
 
+        $messageBody = "Ai primit un mesaj de la " . $request->getParam('surname') . " cu nr de tel: " . $request->getParam('phone') . " cu mesaj: <br/>" . $request->getParam('message');
+
+        $sent = self::sendMail($request, $this->mailer, 'mesaj de contact', $messageBody);
+
+        if($sent == true){
+            $this->setFlash("Mesajul dva a fost trimis");
+            return $this->redirect($response, 'contact', 302);
+        }else{
+            $this->setFlash("Error sending mail", "error");
+            return $this->redirect($response, 'contact', 400);
+        }
     }
+
+
 }

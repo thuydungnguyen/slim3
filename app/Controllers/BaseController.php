@@ -85,7 +85,7 @@ class BaseController
     }
 
     public function __get($name) {
-        return $this->container->get($name);
+        return $this->container->$name;
     }
 
     public function dump($variable)
@@ -93,6 +93,20 @@ class BaseController
         echo '<pre>';
         print_r($variable);
         echo '</pre>';
+    }
+
+    public static function sendMail(Request $request, $mailer, $subject, $messageBody)
+    {
+        $fullName = $request->getParam('name').' '.$request->getParam('surname');
+
+        $message = \Swift_Message::newInstance($subject)
+            ->setFrom([$request->getParam('email')  => $fullName])
+            ->setTo('contact@localhost.com')
+            ->setBody($messageBody);
+
+        $sent = $mailer->send($message);
+
+        return $sent;
     }
 
 }
