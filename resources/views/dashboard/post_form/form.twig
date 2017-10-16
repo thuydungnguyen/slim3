@@ -24,22 +24,22 @@
         {% endfor %}
     </div>
 
-    <div class="form-group {% if flash.errors.description %} has-error {% endif %}">
-        <label for="description">Description</label>
-        <input type="text" name="description" id="description" class="form-control" value="{{ old.description ? old.description : post.description }}" required>
-        {% for error in flash.errors.description %}
+    <div class="form-group {% if flash.errors.zone %} has-error {% endif %}">
+        <label for="zone">Zone</label>
+        <select class="form-control" name="zone" id="zone"  required>
+            {% for value, name in zoneList %}
+                <option value="{{ value }}" {% if old.zone == value or post.zone == value  %}selected="true"{% endif %}>{{  name|capitalize }}</option>
+            {% endfor %}
+        </select>
+        {% for error in flash.errors.zone %}
             <span class="help-block">{{ error }}</span>
         {% endfor %}
     </div>
 
-    <div class="form-group {% if flash.errors.zone %} has-error {% endif %}">
-        <label for="zone">Zone</label>
-        <select class="form-control" name="zone" id="zone" value="{{ old.zone ? old.zone : post.zone }}" required>
-            {% for value, name in zoneList %}
-            <option value="{{ value }}">{{  name|capitalize }}</option>
-            {% endfor %}
-        </select>
-        {% for error in flash.errors.zone %}
+    <div class="form-group {% if flash.errors.description %} has-error {% endif %}">
+        <label for="description">Description</label>
+        <input type="text" name="description" id="description" class="form-control" value="{{ old.description ? old.description : post.description }}">
+        {% for error in flash.errors.description %}
             <span class="help-block">{{ error }}</span>
         {% endfor %}
     </div>

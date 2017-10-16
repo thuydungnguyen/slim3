@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 
+use App\Models\Image;
 use App\Models\User;
 use Cocur\Slugify\Slugify;
 use Psr\Http\Message\ResponseInterface;
@@ -66,6 +67,13 @@ class BaseController
         return $slug->slugify($request->getParam('title'));
     }
 
+    public function deleteImg(Image $img)
+    {
+        $imgName = $img->name;
+        $img->delete();
+        unlink($this->upload_directory . DIRECTORY_SEPARATOR . $imgName);
+    }
+
     public static function moveUploadedFile($directory, UploadedFile $uploadedFile)
     {
         $extension = pathinfo($uploadedFile->getClientFilename(), PATHINFO_EXTENSION);
@@ -77,7 +85,7 @@ class BaseController
     }
 
     public function __get($name) {
-        return $this->container->get($name);
+        return $this->container->$name;
     }
 
     public function dump($variable)
@@ -85,6 +93,20 @@ class BaseController
         echo '<pre>';
         print_r($variable);
         echo '</pre>';
+    }
+
+    public static function sendMail(Request $request, $mailer, $subject, $messageBody)
+    {
+        $fullName = $request->getParam('name').' '.$request->getParam('surname');
+
+        $message = \Swift_Message::newInstance($subject)
+            ->setFrom([$request->getParam('email')  => $fullName])
+            ->setTo('contact@localhost.com')
+            ->setBody($messageBody);
+
+        $sent = $mailer->send($message);
+
+        return $sent;
     }
 
 }

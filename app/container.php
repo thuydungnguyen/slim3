@@ -20,6 +20,12 @@ $container['auth'] = function () use ($container) {
 
 $container['upload_directory'] = dirname(__DIR__) . '/public/uploads';
 
+$container['mailer'] = function ($container) {
+    $transport = Swift_SmtpTransport::newInstance('localhost', 1025);
+    $mailer = Swift_Mailer::newInstance($transport);
+    return $mailer;
+};
+
 // Service factory for the ORM
 $capsule = new \Illuminate\Database\Capsule\Manager;
 $capsule->addConnection($container['settings']['db']);

@@ -1,34 +1,14 @@
 $( document ).ready(function() {
-    tinymce.init({
-        selector: '#content',
-        height: 500,
-        menubar: false,
-        plugins: [
-            'advlist autolink lists link image charmap print preview anchor textcolor',
-            'searchreplace visualblocks code fullscreen',
-            'insertdatetime media table contextmenu paste code help'
-        ],
-        setup: function (editor) {
-            editor.on('change', function () {
-                editor.save();
-            });
-        },
-        toolbar: 'insert | undo redo |  styleselect | bold italic backcolor  | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help',
-        content_css: [
-            '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
-            '//www.tinymce.com/css/codepen.min.css']
-    });
-
     $(document).on('click', '.btn-remove', function() {
-        PagesActions.deletepost($(this).parents('tr').data('post-id'));
+        PostListActions.deletepost($(this).parents('tr').data('post-id'));
     });
 
     $(document).on('click', '.change-status', function() {
-        PagesActions.changeStatus($(this).parents('tr').data('post-id'));
+        PostListActions.changeStatus($(this).parents('tr').data('post-id'));
     });
 });
 
-var PagesActions = {
+var PostListActions = {
     deletepost: function(id){
         $.ajax({
             url: baseUrl + '/admin/deletePost',

@@ -16,7 +16,11 @@ class Validator
             try {
                 $rule->setName(ucfirst($field))->assert($request->getParam($field));
             } catch ( NestedValidationException $e) {
-                $this->errors[$field] = $e->getMessages();
+                if($field === 'g-recaptcha-response'){
+                    $this->errors['captcha'] = $e->getMessages();
+                }else{
+                    $this->errors[$field] = $e->getMessages();
+                }
             }
         }
 
