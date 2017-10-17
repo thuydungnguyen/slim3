@@ -56,7 +56,7 @@ class PostFormController extends BaseController
                 'description' => $request->getParam('description'),
                 'zone'  => $request->getParam('zone'),
                 'content'  => $request->getParam('content'),
-                'slug'      => $this->slugify($request), // bug slug
+                'slug'      => $this->slugify($request),
                 'is_active' => $request->getParam('is_active')
             ]
         )->id;
