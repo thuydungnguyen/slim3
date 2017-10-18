@@ -12,13 +12,11 @@ Kameran:
 
 PT mail: (ai angular deci ai npm daca nu trb sa instalezi si npm)
 
+install inside slim3 folder:
 to install maildev: npm install -g maildev@1.0.0-rc2
 to start maildev: maildev --ip 127.0.0.1
-run those command lines inside slim3 folder
 
-pt bug la pagina legislative dai copy la tot ce e in mig1.sql si dai paste in SQL la phpmyadmin
 
-in pagina de cere oferta, campul Serviciul Solicitat  nu trb sa fie de tip select si o lista de servici ??
 
 in pagina de contact si cere-oferta butonul Back pus in dreapta poate crea confuzie (parerea mea)
 => de analizat in dreapta sau stanga

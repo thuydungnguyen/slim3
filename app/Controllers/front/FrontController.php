@@ -58,7 +58,7 @@ class FrontController extends BaseController
             return $this->redirect($response, 'contact', 400);
         }
 
-        $messageBody = "Ai primit un mesaj de la " . $request->getParam('surname') . " cu nr de tel: " . $request->getParam('phone') . " cu mesaj: <br/>" . $request->getParam('message');
+        $messageBody = "Ai primit un mesaj de la " . $request->getParam('surname') . "<br/> cu nr de tel: " . $request->getParam('phone') . "<br/> cu mesaj: " . $request->getParam('message');
 
         $sent = self::sendMail($request, $this->mailer, 'mesaj de contact', $messageBody);
 
