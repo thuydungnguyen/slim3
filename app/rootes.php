@@ -18,7 +18,7 @@ $app->group('/admin', function() {
     $this->get('/post[/{id}]', \App\Controllers\Dashboard\PostFormController::class.':getPost')->setName('post');
     $this->post('/post', \App\Controllers\Dashboard\PostFormController::class.':savePost');
 
-    $this->get('', \App\Controllers\Dashboard\PostListController::class.':home')->setName('home');
+    $this->get('/home', \App\Controllers\Dashboard\PostListController::class.':home')->setName('home');
     $this->post('/changeStatus', \App\Controllers\Dashboard\PostListController::class.':changeStatus');
     $this->post('/deletePost', \App\Controllers\Dashboard\PostListController::class.':deletePost');
 
@@ -28,10 +28,11 @@ $app->group('/admin', function() {
 
 
 $app->group('/admin', function() use ($container) {
-
+    $this->get('', \App\Controllers\Dashboard\AuthController::class.':getSignIn')->setName('signin')
+        ->add(new \App\Middlewares\TwigCsrfMiddleware($container->view->getEnvironment(), $container->csrf));
     $this->get('/signin', \App\Controllers\Dashboard\AuthController::class.':getSignIn')->setName('signin')
         ->add(new \App\Middlewares\TwigCsrfMiddleware($container->view->getEnvironment(), $container->csrf));
 
     $this->post('/signin', \App\Controllers\Dashboard\AuthController::class.':postSignIn');
-
+    $this->post('', \App\Controllers\Dashboard\AuthController::class.':postSignIn');
 })->add($container->csrf);

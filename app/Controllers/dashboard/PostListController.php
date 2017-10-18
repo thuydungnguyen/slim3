@@ -8,12 +8,13 @@ use App\Models\Image;
 use App\Models\Post;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
+use Illuminate\Pagination\Paginator;
 
 class PostListController extends BaseController
 {
-    public function home(RequestInterface $request, ResponseInterface $response)
+    public function home(RequestInterface $request, ResponseInterface $response, $args)
     {
-        $postList = Post::orderByDesc('created_at')->get();
+        $postList = Post::orderByDesc('created_at')->paginate(3);
         return $this->render($response, 'dashboard/post_list/post_list.twig', ['postList' => $postList]);
     }
 
