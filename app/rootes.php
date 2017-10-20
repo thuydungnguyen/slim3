@@ -24,6 +24,8 @@ $app->group('/admin', function() {
 
     $this->get('/signout', \App\Controllers\Dashboard\AuthController::class.':getSignOut')->setName('signout');
 
+    $this->get('/subscriptions', \App\Controllers\Dashboard\ClientListController::class.':show')->setName('clients');
+
 })->add(new \App\Middlewares\AuthMiddleware($container));
 
 

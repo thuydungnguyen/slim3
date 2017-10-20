@@ -43,6 +43,28 @@
         </tbody>
     </table>
 
+    <div class="ui basic center aligned segment pull-right">
+        <div class="ui yellow pagination menu">
+            <a class="item" {% if postList.currentPage != 1 %} href="{{ path_for('home') }}?page={{ postList.currentPage - 1 }}" {% endif %}><span>&laquo;</span></a>
+            {% if postList.lastPage > 4 %}
+                {% for value in 1..4 %}
+                    <a class="{% if postList.currentPage == value %} active {% endif %} item"	 href="{{ path_for('home') }}?page={{ value }}">{{ value }}</a>
+                {% endfor %}
+                {% for value in (postList.currentPage+1)..(postList.currentPage + 1) if (postList.currentPage < postList.lastPage) and (postList.currentPage > 3) %}
+                    {% if postList.currentPage > 4 %}<a class="{% if postList.currentPage == (value - 1) %} active {% endif %} item" href="{{ path_for('home') }}?page={{ value - 1 }}">{{ value - 1 }}</a>{% endif %}
+                    <a class="{% if postList.currentPage == value %} active {% endif %} item"	 href="{{ path_for('home') }}?page={{ value }}">{{ value }}</a>
+                {% endfor %}
+                <div class="disabled item">...</div>
+            {% else %}
+                {% for value in 1..(postList.lastPage-1) %}
+                    <a class="{% if postList.currentPage == value %} active {% endif %} item"	 href="{{ path_for('home') }}?page={{ value }}">{{ value }}</a>
+                {% endfor %}
+            {% endif %}
+            <a class="{% if postList.currentPage == postList.lastPage %} active {% endif %} item"	 href="{{ path_for('home') }}?page={{ postList.lastPage }}">{{ postList.lastPage }}</a></li>
+            <a class="item" {% if postList.currentPage != postList.lastPage %} href="{{ path_for('home') }}?page={{ postList.currentPage + 1 }}" {% endif %} rel="next">&raquo;</a>
+        </div>
+    </div>
+
 {% endblock %}
 
 {% block customJS %}

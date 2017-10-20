@@ -67,7 +67,7 @@ class PostFormController extends BaseController
             $extension = pathinfo($uploadedFile->getClientFilename(), PATHINFO_EXTENSION);
 
             if(!in_array($extension, array('png', 'jpg', 'PNG', 'JPG'))){
-                $this->setFlash('Image must be of type png ot jpg', 'error');
+                $this->setFlash('Image must be of type png or jpg', 'error');
                 return $this->redirect($response, 'post', 400, ['id' => $postId]);
             }
 

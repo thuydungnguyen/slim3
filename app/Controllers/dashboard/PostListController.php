@@ -14,7 +14,7 @@ class PostListController extends BaseController
 {
     public function home(RequestInterface $request, ResponseInterface $response, $args)
     {
-        $postList = Post::orderByDesc('created_at')->paginate(3);
+        $postList = Post::orderByDesc('created_at')->paginate(5, ['*'], 'page', $request->getParam('page'));
         return $this->render($response, 'dashboard/post_list/post_list.twig', ['postList' => $postList]);
     }
 
