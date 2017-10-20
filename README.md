@@ -16,12 +16,10 @@ install inside slim3 folder:
 to install maildev: npm install -g maildev@1.0.0-rc2
 to start maildev: maildev --ip 127.0.0.1
 
-
-
-in pagina de contact si cere-oferta butonul Back pus in dreapta poate crea confuzie (parerea mea)
-=> de analizat in dreapta sau stanga
-
-Atentie cand faci un form, pt fiecare input, sa faci atentie ce pui la attr name, id, type
+pt image size:
+Just set these in php.ini:
+upload_max_filesize = 1000M;
+post_max_size = 1000M;
 
 !!! pt git commit: 
 git status 
@@ -31,8 +29,6 @@ git push origin master
 
 
 Thuy Dung:
-=> de fixat bug cu image size la adaugare image
-=> de fixat bug cu slug url
-=> de facut sistem de newsletter
+=> bug sistem de paginare
 
 

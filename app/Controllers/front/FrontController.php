@@ -4,9 +4,12 @@ namespace App\Controllers\Front;
 
 use App\Controllers\BaseController;
 use App\Models\Post;
+use App\Models\Client;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Respect\Validation\Validator as v;
+use Slim\Http\Request;
+
 v::with('App\\Validation\\Rules\\');
 
 class FrontController extends BaseController
@@ -86,15 +89,27 @@ class FrontController extends BaseController
             'nr_angajat'        => v::notEmpty(),
             'nr_fac'        => v::notEmpty(),
             'email'        => v::notEmpty(),
-            'phone'        => v::notEmpty(),
+            'phone'        => v::phone(),
             'message'       => v::notEmpty(),
             'g-recaptcha-response' => v::recaptcha()
         ]);
 
-        if($validation->failed()) {
+        if ($validation->failed()) {
             $this->setFlash($validation->getErrors(), 'errors');
             return $this->redirect($response, 'offer', 400);
         }
+
+        $subscription = $request->getParam('subscribe');
+
+        if (isset($subscription) && $subscription != null) {
+            $created = self::saveClient($request);
+
+            if(!$created){
+                $this->setFlash("Va rugam sa reincercati !", 'error');
+                return $this->redirect($response, 'offer', 400);
+            }
+        }
+
         $messageBody = "Ai primit un mesaj de cerere oferta de la: <br/>";
         $messageBody .= "Numele Companiei: " . $request->getParam('company_name') . "<br/>";
         $messageBody .= "Persoana de Contact: " . $request->getParam('person_name') . "<br/>";
@@ -117,5 +132,25 @@ class FrontController extends BaseController
         }
     }
 
+    private static function saveClient(Request $request)
+    {
+        $existClient = Client::where('email', $request->getParam('email'))->count();
+        $result = true;
+
+        if($existClient < 1) {
+            $created = Client::create([
+                'name'  => $request->getParam('person_name'),
+                'company'   => $request->getParam('company_name'),
+                'phone'     => $request->getParam('phone'),
+                'email'     => $request->getParam('email')
+            ]);
+
+            if(!$created instanceof Client){
+                return false;
+            }
+        }
+
+        return $result;
+    }
 
 }

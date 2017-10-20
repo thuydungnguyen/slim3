@@ -56,7 +56,7 @@ class PostFormController extends BaseController
                 'description' => $request->getParam('description'),
                 'zone'  => $request->getParam('zone'),
                 'content'  => $request->getParam('content'),
-                'slug'      => $this->slugify($request), // bug slug
+                'slug'      => $this->slugify($request),
                 'is_active' => $request->getParam('is_active')
             ]
         )->id;
@@ -67,7 +67,7 @@ class PostFormController extends BaseController
             $extension = pathinfo($uploadedFile->getClientFilename(), PATHINFO_EXTENSION);
 
             if(!in_array($extension, array('png', 'jpg', 'PNG', 'JPG'))){
-                $this->setFlash('Image must be of type png ot jpg', 'error');
+                $this->setFlash('Image must be of type png or jpg', 'error');
                 return $this->redirect($response, 'post', 400, ['id' => $postId]);
             }
 

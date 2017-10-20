@@ -55,7 +55,7 @@ class BaseController
 
     public function slugify(Request $request)
     {
-        if(!empty($slug)){
+        if(!empty($request->getParam('slug'))){
             $validation = $this->validate($request, ['slug' => v::slug()]);
 
             if(!$validation->failed()){
