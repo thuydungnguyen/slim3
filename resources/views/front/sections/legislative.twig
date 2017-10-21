@@ -10,7 +10,9 @@
                     {% for post in postList %}
 
                         <div class="card" style="width: 20rem;">
-                            <img class="card-img-top" src="{{ base_url() }}/uploads/{{ post.image.name }}" alt="Card image cap">
+                            {% if post.image.name %}
+                                <img class="card-img-top" src="{{ base_url() }}/uploads/{{ post.image.name }}" alt="Card image cap">
+                            {% endif %}
                             <div class="card-block">
                                 <h4 class="card-title">{{ post.title }}</h4>
                                 <p class="card-text">{{ post.description }}</p>
@@ -31,7 +33,9 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <img class="img-fluid" src="{{ base_url() }}/uploads/{{ post.image.name }}">
+                                        {% if post.image.name %}
+                                            <img class="img-fluid" src="{{ base_url() }}/uploads/{{ post.image.name }}">
+                                        {% endif %}
                                         <p>{{ post.content|raw }}</p>
                                     </div>
                                 </div>
@@ -44,6 +48,7 @@
 
 
 
+                {% if postList.currentPage %}
 
                 <div class="ui basic center aligned segment float-right">
                     <div class="ui yellow pagination menu">
@@ -67,6 +72,7 @@
                     </div>
                 </div>
 
+                {% endif %}
 
             </div>
         </div>
