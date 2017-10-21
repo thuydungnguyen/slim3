@@ -36,12 +36,9 @@ class PostFormController extends BaseController
         $rules = [
             'title'         => v::notEmpty(),
             'zone'          => v::notEmpty()->noWhitespace(),
-            'content'       => v::notEmpty()
+            'content'       => v::notEmpty(),
+            'description'   => v::notEmpty()
         ];
-
-        if($request->getParam('zone') !== 'blog'){
-            $rules['description'] = v::notEmpty();
-        }
 
         $validation = $this->validate($request, $rules);
         if($validation->failed()) {

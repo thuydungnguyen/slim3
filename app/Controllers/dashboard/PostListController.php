@@ -13,7 +13,14 @@ class PostListController extends BaseController
 {
     public function home(RequestInterface $request, ResponseInterface $response, $args)
     {
-        $postList = Post::orderByDesc('created_at')->paginate(5, ['*'], 'page', $request->getParam('page'));
+        $perPage = 15;
+        $totalPosts = Post::count();
+
+        if ($totalPosts > $perPage) {
+            $postList = Post::orderByDesc('created_at')->paginate($perPage, ['*'], 'page', $request->getParam('page'));
+        } else {
+            $postList = Post::orderByDesc('created_at')->get();
+        }
         return $this->render($response, 'dashboard/post_list/post_list.twig', ['postList' => $postList]);
     }
 

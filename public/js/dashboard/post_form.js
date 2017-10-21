@@ -1,12 +1,5 @@
 $( document ).ready(function() {
     FormActions.initTinyMCE();
-
-    FormActions.toggleDescription($('select[name=zone]').val());
-
-    $(document).on('change', 'select[name=zone]', function(){
-        FormActions.toggleDescription($(this).val());
-    });
-
 });
 
 var FormActions = {
@@ -30,16 +23,5 @@ var FormActions = {
                 '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
                 '//www.tinymce.com/css/codepen.min.css']
         });
-    },
-    toggleDescription: function (zone) {
-        var descriptionInput = $(document).find("input[name=description]");
-
-        if(zone === 'blog'){
-            descriptionInput.removeAttr('required');
-            descriptionInput.parents('.form-group').hide();
-        }else{
-            descriptionInput.parents('.form-group').show();
-            descriptionInput.attr('required', 'true');
-        }
     }
 }

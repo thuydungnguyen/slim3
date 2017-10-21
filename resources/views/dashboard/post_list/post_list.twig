@@ -43,6 +43,8 @@
         </tbody>
     </table>
 
+    {% if postList.currentPage %}
+
     <div class="ui basic center aligned segment pull-right">
         <div class="ui yellow pagination menu">
             <a class="item" {% if postList.currentPage != 1 %} href="{{ path_for('home') }}?page={{ postList.currentPage - 1 }}" {% endif %}><span>&laquo;</span></a>
@@ -64,6 +66,8 @@
             <a class="item" {% if postList.currentPage != postList.lastPage %} href="{{ path_for('home') }}?page={{ postList.currentPage + 1 }}" {% endif %} rel="next">&raquo;</a>
         </div>
     </div>
+
+    {% endif %}
 
 {% endblock %}
 
