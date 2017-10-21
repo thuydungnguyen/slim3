@@ -34,7 +34,7 @@ class FrontController extends BaseController
 
     public function legislative(RequestInterface $request, ResponseInterface $response)
     {
-        $returnArray['postList'] = Post::where('is_active', 1)->where('zone', 'blog')->orderByDesc('created_at')->get();
+        $returnArray['postList'] = Post::where('is_active', 1)->where('zone', 'blog')->orderByDesc('created_at')->paginate(5, ['*'], 'page', $request->getParam('page'));
         $returnView = 'front/sections/legislative.twig';
 
         return $this->render($response, $returnView, $returnArray);

@@ -3469,13 +3469,6 @@ tbody.collapse.show {
   .breadcrumb-item.active {
     color: #636c72; }
 
-.pagination {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  padding-left: 0;
-  list-style: none;
-  border-radius: 0.25rem; }
 
 .page-item:first-child .page-link {
   margin-left: 0;
@@ -8914,6 +8907,7 @@ img.zoom-img {
     letter-spacing: .15em;
     color: #BEC8CE;
     text-transform: uppercase; }
+
   @media (min-width: 576px) {
     .pull-quote {
       max-width: 75%; }
@@ -9008,4 +9002,5 @@ div.wtf > hr.style18 {
     border-width: 1px 0 0 0;
     border-radius: 20px;
 }
+
 
