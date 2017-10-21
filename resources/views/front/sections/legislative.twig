@@ -4,46 +4,74 @@
 
     <div class="block block-fill-height text-center">
         <div class="block-xs-middle">
-            <div class="container-fluid">
+            <div class="container">
 
-                {% for post in postList %}
 
-                    <blockquote class="pull-quote">
-                        <img src="{{ base_url() }}/uploads/{{ post.image.name }}" alt="">
-                        <h2>{{ post.title }}</h2>
-                        {{ post.content|raw }}
-                        <div class="wtf">
-                            <hr class="style18">
+                    {% for post in postList %}
+
+                        <div class="card" style="width: 20rem;">
+                            <img class="card-img-top" src="{{ base_url() }}/uploads/{{ post.image.name }}" alt="Card image cap">
+                            <div class="card-block">
+                                <h4 class="card-title">{{ post.title }}</h4>
+                                <p class="card-text">{{ post.description }}</p>
+                                <button type="button" class="btn btn-sm btn-pill btn-primary" data-toggle="modal" data-target="#noutatiLegislativeModal{{ post.id }}">
+                                    Citeste mai mult
+                                </button>
+                            </div>
                         </div>
 
-                    </blockquote>
+                        <!-- Modal -->
+                        <div class="modal fade" id="noutatiLegislativeModal{{ post.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLongTitle">{{ post.title }}</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <img class="img-fluid" src="{{ base_url() }}/uploads/{{ post.image.name }}">
+                                        <p>{{ post.content|raw }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-                {% endfor %}
+
+                    {% endfor %}
 
 
-                <div class="jumbotron col-6">
-                    <h1 class="display-3">Hello, world!</h1>
-                    <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-                    <hr class="my-4">
-                    <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-                    <p class="lead">
-                        <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
-                    </p>
-                </div>
 
-                <div class="jumbotron col-6">
-                    <h1 class="display-3">Hello, world!</h1>
-                    <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-                    <hr class="my-4">
-                    <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-                    <p class="lead">
-                        <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
-                    </p>
+
+
+                <div class="ui basic center aligned segment float-right">
+                    <div class="ui yellow pagination menu">
+                        <a class="item" {% if postList.currentPage != 1 %} href="{{ path_for('legislative') }}?page={{ postList.currentPage - 1 }}" {% endif %}><span>&laquo;</span></a>
+                        {% if postList.lastPage > 4 %}
+                            {% for value in 1..4 %}
+                                <a class="{% if postList.currentPage == value %} active {% endif %} item"	 href="{{ path_for('legislative') }}?page={{ value }}">{{ value }}</a>
+                            {% endfor %}
+                            {% for value in (postList.currentPage+1)..(postList.currentPage + 1) if (postList.currentPage < postList.lastPage) and (postList.currentPage > 3) %}
+                                {% if postList.currentPage > 4 %}<a class="{% if postList.currentPage == (value - 1) %} active {% endif %} item" href="{{ path_for('legislative') }}?page={{ value - 1 }}">{{ value - 1 }}</a>{% endif %}
+                                <a class="{% if postList.currentPage == value %} active {% endif %} item"	 href="{{ path_for('legislative') }}?page={{ value }}">{{ value }}</a>
+                            {% endfor %}
+                            <div class="disabled item">...</div>
+                        {% else %}
+                            {% for value in 1..(postList.lastPage-1) %}
+                                <a class="{% if postList.currentPage == value %} active {% endif %} item"	 href="{{ path_for('legislative') }}?page={{ value }}">{{ value }}</a>
+                            {% endfor %}
+                        {% endif %}
+                        <a class="{% if postList.currentPage == postList.lastPage %} active {% endif %} item"	 href="{{ path_for('legislative') }}?page={{ postList.lastPage }}">{{ postList.lastPage }}</a></li>
+                        <a class="item" {% if postList.currentPage != postList.lastPage %} href="{{ path_for('legislative') }}?page={{ postList.currentPage + 1 }}" {% endif %} rel="next">&raquo;</a>
+                    </div>
                 </div>
 
 
             </div>
         </div>
     </div>
+
+
 
 {% endblock %}

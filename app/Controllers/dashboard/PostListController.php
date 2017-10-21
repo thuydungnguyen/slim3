@@ -8,7 +8,6 @@ use App\Models\Image;
 use App\Models\Post;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
-use Illuminate\Pagination\Paginator;
 
 class PostListController extends BaseController
 {
