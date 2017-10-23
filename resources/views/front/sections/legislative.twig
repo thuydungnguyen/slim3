@@ -3,8 +3,8 @@
 {% block content %}
 
     <div class="block block-fill-height text-center">
-        <div class="block-xs-middle">
-            <div class="container">
+        <div class="container">
+            <div class="row">
 
 
                     {% for post in postList %}
@@ -48,7 +48,11 @@
 
 
 
-                {% if postList.currentPage %}
+
+
+            </div>
+
+            {% if postList.currentPage %}
 
                 <div class="ui basic center aligned segment float-right">
                     <div class="ui yellow pagination menu">
@@ -72,9 +76,7 @@
                     </div>
                 </div>
 
-                {% endif %}
-
-            </div>
+            {% endif %}
         </div>
     </div>
 

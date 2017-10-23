@@ -34,7 +34,7 @@ class FrontController extends BaseController
 
     public function legislative(RequestInterface $request, ResponseInterface $response)
     {
-        $perPage = 5;
+        $perPage = 6;
         $totalPosts = Post::where('is_active', 1)->where('zone', 'blog')->count();
 
         if($totalPosts > $perPage){

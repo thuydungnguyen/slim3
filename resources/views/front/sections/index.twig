@@ -10,12 +10,12 @@
                 <div class="row app-align-center">
 
                     <div class="col-sm-5 hidden-sm-down">
-                        <img class="app-iphone" src="{{ base_url() }}/img/test12.jpg" style="width: 100%;">
+                        <img src="{{ base_url() }}/img/background.png" style="width: 120%;">
                     </div>
 
                     <div class="col-md-6 offset-md-1 col-sm-12 offset-sm-0">
                         <h6 class="text-muted text-uppercase">Despre Noi</h6>
-                        <h3>ABS Enterprises</h3>
+                        <h3><span class="icon icon-globe"></span> ABS Group</h3>
                         <p>este o companie, care activeaza in aria serviciilor contabile, de consultanta, salarizare. De asemenea prestam si servicii aditionale, cum ar fi cele aferente Registrului Comertului, consultanta pe servicii de avocatura, servicii de traduceri autorizate si servicii de inmatriculari-radieri auto. Compania a luat nastere dintr-o initiativa indrazneata si din dorinta de a aduce o influienta noua in piata de servicii financiare si suport pentru intreprinderi.</p>
                         <p>Evolutia ascendenta a societatii este datorata in primul rand unui cumul de idei, care a fost sintetizat si ulterior materializat in activitati sustinute, guvernate de principii de baza in conformitate cu etica profesionala, precum: identificarea nevoilor si indeplinirea tuturor cerintelor clientilor nostri, calitatea si etica in afaceri, experienta acumulata in timp, dezvoltarea profesionala continua.</p>
                         <p>Compania si-a facut un obiectiv major din abordarea profesionista a fiecarui proiect din portofoliu, indiferent de dimensiunile sau provocarile acestuia. De asemenea, printre prioritatile noastre se numara stabilirea de parteneriate cu clientii prin managamentul de succes al proiectelor. In acest sens, fiecare membru al echipei isi organizeaza activitatea cu multa pasiune si energie profesionala mizand pe comunicare, profesionalism si solutii aplicate nevoilor punctuale ale fiecarui client in parte. Pentru a oferi servicii de excelenta, ne preocupam in permanenta de perfectionarea profesionala, pentru a fi conectati la zi la modificarile cadrului legislativ-fiscal, astfel incat managementul proiectelor sa se desfasoare in conformitate cu standardele la zi din domeniu, nationale si europene.</p>
@@ -32,14 +32,62 @@
             <div class="container">
                 <div class="row app-align-center py-3">
                     <div class="col-sm-5 push-sm-7 py-5">
-                        <p>Serviciile furnizate de <strong>ABS Enterprises</strong> in aria de contabilitate, taxe si salarizare sunt complete, atingand cu succes cele mai inalte standarde profesionale din intreg registrul de cerinte al oricarei companii, care isi desfasoara activitatile in Romania.</p>
-                        <p><strong>ABS Enterprises </strong>este societate membra al <strong>Corpului Expertilor Contabili si Contabili Autorizati din Romania.</strong></p>
+                        <p>Serviciile furnizate de <strong><span class="icon icon-globe"></span> ABS Group</strong> in aria de contabilitate, taxe si salarizare sunt complete, atingand cu succes cele mai inalte standarde profesionale din intreg registrul de cerinte al oricarei companii, care isi desfasoara activitatile in Romania.</p>
+                        <p><strong><span class="icon icon-globe"></span> ABS Group </strong>este societate membra al <strong>Corpului Expertilor Contabili si Contabili Autorizati din Romania & Camera Auditorilor Financiari.</strong></p>
                     </div>
                 </div>
             </div>
         </div>
 
     </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="newsLetter" tabindex="-1" role="dialog" aria-labelledby="newsLetterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="newsLetterTitle"><strong><span class="icon icon-leaf"></span></strong>Inscrie-te acum!</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <form id="newsLetter" method="post" action="" role="form">
+
+                        <div class="controls">
+                            <div class="container">
+
+
+                                    <img src="{{ base_url() }}/img/newsletter.jpeg" style="width: 100%;margin-bottom:35px;">
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="name"><strong>Nume Complet *</strong></label>
+                                            <input id="name" type="text" name="name" value="" class="form-control">
+                                        </div>
+                                    </div><!-- End form-group name -->
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="email"><strong>Email *</strong></label>
+                                            <input id="email" type="email" name="email" value="" class="form-control">
+                                        </div>
+                                    </div><!-- End form-group Email -->
+
+                                    <input type="submit" class="btn btn-xs btn-pill btn-success" style="margin-left:14px;" value="Aboneaza-te">
+
+
+                            </div><!-- End Class Container -->
+                        </div><!-- END Class CONTROLS -->
+
+                    </form><!-- END FORM -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 
 
